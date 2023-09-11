@@ -1,21 +1,23 @@
-import fs from 'fs'
+import {promises as fsp} from 'fs'
 
-const load = function(filename) {
-	return new Promise((resolve, reject)=>{
-		fs.readFile(filename, 'utf8', (err, data)=>{
-			if(err) return reject(err)
-			resolve(JSON.parse(data))
-		})
-	})
+const load = async (filename) =>{
+	try{
+		return fsp.readFile(filename,'utf8')
+	}
+	catch(err){
+		console.log(err)
+	}
 }
+	
+	
 
-const save = function(filename,data){
-	return new Promise((resolve, reject)=>{
-        fs.writeFile(filename, JSON.stringify(data), (err)=>{
-            if(err) return reject(err)
-            resolve("File succesfully saved")
-        })
-    })
+const save = async (filename, data) => {
+	try{
+    	fsp.writeFile(filename, JSON.stringify(data), 'utf8')
+	}
+	catch(err){
+        console.log(err)
+    }
 }
 
 export default {save, load}
