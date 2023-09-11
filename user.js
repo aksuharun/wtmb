@@ -11,8 +11,8 @@ const User = class{
 		console.log(`username: ${chalk.bold(this.username)}`)
 	}
 
-	static create(obj){
-		return new User(obj.username, obj.name, obj.surname, obj.age)
+	static create({username, name, surname, age}){
+		return new User(username, name, surname, age)
 	}
 }
 

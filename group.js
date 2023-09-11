@@ -1,3 +1,4 @@
+import User from './user.js'
 const Group = class{
 	constructor(name, participants = []){
 		this.name = name
@@ -13,8 +14,10 @@ const Group = class{
 		this.participants.forEach(printName)
 	}
 	
-	static create(obj){
-		return new Group(obj.name, obj.participants)
+	static create({name, participants}){
+		const group = new Group(name)
+		group.participants = participants.map(User.create)
+		return group;
 	}
 }
 
