@@ -1,5 +1,5 @@
-const fs = require('fs')
-const Flatted = require('flatted/cjs');
+import fs from 'fs';
+import Flatted from 'flatted'
 
 module.exports = class Service {
   constructor(model, dbPath) {
