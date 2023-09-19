@@ -7,9 +7,7 @@ const load = async (filename) =>{
 	catch(err){
 		console.log(err)
 	}
-}
-	
-	
+}	
 
 const save = async (filename, data) => {
 	try{
