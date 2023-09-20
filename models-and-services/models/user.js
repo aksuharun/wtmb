@@ -10,10 +10,12 @@ const User = class{
 
     join(group) {
         this.groups.push(group)
-        groups.join.push(this)
+        group.participants.push(this)
     }
 
-    static create({username, name, sirname ,age groups, id}) {
+    static create({username, name, sirname ,age, groups, id}) {
         return new User(username, name, sirname, age, groups, id)
     }
 }
+
+export default User

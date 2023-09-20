@@ -13,3 +13,5 @@ const Group = class{
         return new Group(name, participants, id)
     }
 }
+
+export default Group

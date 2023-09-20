@@ -1,0 +1,23 @@
+{
+  "name": "models-and-services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aksuharun/wtmb.git#main"
+  },
+  "author": "Harun Aksu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aksuharun/wtmb/issues"
+  },
+  "homepage": "https://github.com/aksuharun/wtmb/tree/main#readme",
+  "dependencies": {
+    "flatted": "^3.2.9"
+  },
+  "type":"module"
+}
