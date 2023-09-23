@@ -1,0 +1,11 @@
+html
+  head
+    title Users
+    script(src = "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+
+  body
+    h1 User List
+    h2 There are #{users.length} users in the list
+
+    each user in users
+      h4 #{user.id}- #{user.name} #{user.sirname} : #{user.username}
