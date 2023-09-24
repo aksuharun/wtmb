@@ -1,15 +1,15 @@
 import BaseService from './base-service.js'
-import UserModel from '../models/user.js'
+import VisitorModel from '../models/visitor.js'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-class UserService extends BaseService{
+class VisitorService extends BaseService{
 		constructor(){
-				super(UserModel, `${__dirname}/../database/user-database.json`)
+				super(VisitorModel, `${__dirname}/../database/visitor-database.json`)
 		}
 }
 
-export default new UserService()
+export default new VisitorService()
