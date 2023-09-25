@@ -12,7 +12,7 @@ const Visitor = class{
     }
 
     static create({firstName, lastName, birthYear, ownedBooks, id}) {
-        return new User(firstName, lastName, birthYear, ownedBooks, id)
+        return new Visitor(firstName, lastName, birthYear, ownedBooks, id)
     }
 }
 

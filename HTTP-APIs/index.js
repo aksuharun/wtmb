@@ -1,6 +1,6 @@
 import express from 'express'
-import UserService from './services/user-service.js'
-import User from './models/user.js'
+import VisitorService from './services/visitor-service.js'
+import Visitor from './models/visitor.js'
 import bodyParser from 'body-parser'
 
 const app = express()
@@ -12,26 +12,26 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
-app.get('/user/all', async (req, res) => {
-	const users = await UserService.findAll()
-	res.render('users',{users: users})
+app.get('/visitor/all', async (req, res) => {
+	const visitors = await VisitorService.findAll()
+	res.render('visitors',{visitors: visitors})
 })
 
-app.get('/user/:id', async (req, res) => {
+app.get('/visitor/:id', async (req, res) => {
 	const id = req.params.id
-	const user = await UserService.find(id)
+	const visitor = await VisitorService.find(id)
 
-	res.render('user',{user: user})
+	res.render('visitor',{visitor: visitor})
 })
 
-app.post('/user/add',  async (req, res) => {
+app.post('/visitor/add',  async (req, res) => {
 	console.log(req.body)
-	await UserService.add(req.body)
+	await VisitorService.add(req.body)
 })
 
-app.delete('/user/:id', async (req, res) => {
-	await UserService.del(req.params.id)
-	console.log('User deleted successfully! ID: ' + req.params.id)
+app.delete('/visitor/:id', async (req, res) => {
+	await VisitorService.del(req.params.id)
+	console.log('Visitor deleted successfully! ID: ' + req.params.id)
 })
 
 app.listen(3000, ()=>{

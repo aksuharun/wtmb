@@ -1,0 +1,11 @@
+html
+  head
+    title Visitors
+    script(src = "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+
+  body
+    h1 Visitor List
+    h2 There are #{visitors.length} Visitors in the list
+
+    each visitor in visitors
+      h4 #{visitor.id}- #{visitor.firstName} #{visitor.lastName}
