@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+*{
+	margin:0;
+	padding: 0;
+	font-family: 'Roboto Slab', serif;
+	overflow-y: hidden;
+}
+
+:root{
+	--primary-color:#FFF8EA;
+	--secondary-color:#9E7676;
+	--tertiarty-color:#815B5B;
+	--text-color:#594545;
+}
+
+a{
+	text-decoration: none;
+}
+
+a:visited{
+	color: var(--text-color);
+}
+
+/* Header */
+
+header{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: var(--secondary-color);
+	color:var(--primary-color);
+	
+	height:8vh;
+}
+
+nav{
+	width: 30vw;
+}
+
+nav a:visited, nav a:link{
+	color:var(--primary-color) 
+}
+
+nav ul{
+	display: flex;
+	justify-content: space-between;
+
+	list-style: none;
+}
+
+nav li{
+	font-size: 1.2rem;
+	transition: .1s;
+}
+
+nav li:hover{
+
+	transform:
+		translateY(0.1rem)
+		scale(1.1);
+	text-shadow: 0px -0.1rem 3px rgba(0,0,0,0.6);
+}
+
+/* Main */
+
+main{
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	margin-top: 3rem;
+}	
+
+.book-container{
+	width: 80vw;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.book-card{
+	width: 20vw;
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+	.book-card > img{
+		width: 10rem;
+}

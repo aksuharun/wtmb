@@ -1,14 +1,14 @@
 const Book = class{
-    constructor(name, author, page, id) {
-        this.name = name
-        this.author = author
-        this.page = page
-        this.id = id
-    }
+	constructor(name, author, page, img, tags = [], currentOwner = null, id) {
+		this.name = name
+		this.author = author
+		this.page = page
+		this.id = id
+	}
 
-    static create({name, author, page, id}) {
-        return new Group(name, author, page, id)
-    }
+	static create({name, author, page, img, tags, currentOwner, id}) {
+		return new Book(name, author, page, img, tags, currentOwner, id)
+	}
 }
 
 export default Book
