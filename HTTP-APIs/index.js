@@ -29,6 +29,11 @@ app.get('/visitor/:id', async (req, res) => {
 	res.render('visitor',{visitor: visitor})
 })
 
+//Add book
+
+app.get('/book/add', async (req, res) => {
+  res.render('add-book')
+})
 
 
 //	Add visitor
