@@ -103,7 +103,7 @@ nav li:hover{
 /* Main */
 
 
-main{
+main, section{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -111,7 +111,7 @@ main{
 }
 
 
-main > h1, section > h1 {
+main > h1, section > h1{
   margin-bottom: 2rem;
   color: var(--text-color);
   text-shadow: 1px -1px 4px rgba(119, 119, 119, 0.4);
@@ -119,6 +119,10 @@ main > h1, section > h1 {
   font-size: 2rem;
 }
 
+section > h2{
+  color: var(--text-color);
+  font-size: 1.5rem
+}
 
 .book-container{
   display: grid;

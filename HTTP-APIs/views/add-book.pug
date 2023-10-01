@@ -5,8 +5,9 @@ html(lang="en")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		title Add Book 
 	body
+		script 
 		h1 Add New Book
-		form(action="add" method="post")
+		form(method="POST")
 			table
 				tr
 					td
@@ -20,9 +21,14 @@ html(lang="en")
 						input(id="author" type="text" name="author")
 				tr
 					td
+						label(for="publisher") Publisher 
+					td
+						input(id="publisher" type="text" name="publisher")
+				tr
+					td
 						label(for="page") Page
 					td
-						input(id="page" type="number" name="page")
+						input(id="page" type="number" name="page" min="1")
 				tr
 					td
 						label(for="img_url") Image URL
@@ -30,6 +36,6 @@ html(lang="en")
 						input(id="img_url" type="text" name="img_url")
 				tr
 					td(colspan="2")
-						input(type="submit", value="Add")
-			if form
+						input(id='btn' type="submit", value="Add")
+			if success
 				p Book Added

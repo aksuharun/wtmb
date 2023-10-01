@@ -1,0 +1,22 @@
+html
+	head
+		if book != undefined
+			title #{book.name}
+	body
+		if book != undefined
+			img(src=book.img style='width:10rem')
+			table
+				tr
+					td Name
+					td #{book.name}
+				tr
+					td Author
+					td #{book.author}
+				tr
+					td Publisher
+					td #{book.publisher}
+				tr
+					td Pages
+					td #{book.page}
+		else
+			h1 404 Page not found
