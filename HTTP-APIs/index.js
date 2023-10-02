@@ -7,14 +7,13 @@ import Book from './models/book.js'
 const port = 3000; 
 const hostname = '127.0.0.1';
 const app = express()
-const pages = ['Books', 'Contact', 'Login'] 
 
 app.set('view engine', 'pug')
 app.use(express.json())
 app.use(express.urlencoded({ extended:false}))
 
 app.get('/', (req, res) => {
-	res.render('index', {pages:pages})
+	res.render('index')
 })
 
 //Add book
@@ -34,20 +33,20 @@ app.post('/book/add', async (req, res) => {
 		)
 		await BookService.add(book)
 		res.redirect('/book/add')
-	})
+})
+	
+//	View Books
 
-	//	View Books
-	
-	app.get('/book/all', async (req, res) => {
-		const allBooks = await BookService.findAll()
-		res.render('books', {books: allBooks})
-	})
-	
-	app.get('/book/:id', async (req, res) => {
-		const id = req.params.id
-		const book = await BookService.find(id)
-		res.render('book', {book: book})
-	})
+app.get('/book/all', async (req, res) => {
+	const allBooks = await BookService.findAll()
+	res.render('books', {books: allBooks})
+})
+
+app.get('/book/:id', async (req, res) => {
+	const id = req.params.id
+	const book = await BookService.find(id)
+	res.render('book', {book: book})
+})
 
 //	View Visitors
 app.get('/visitor/all', async (req, res) => {
@@ -58,17 +57,10 @@ app.get('/visitor/all', async (req, res) => {
 app.get('/visitor/:id', async (req, res) => {
 	const id = req.params.id
 	const visitor = await VisitorService.find(id)
-
+	
 	res.render('visitor', {visitor: visitor})
 })
 
-
-//	Add visitor
-
-app.post('/visitor/add',	async (req, res) => {
-	console.log(req.body)
-	await VisitorService.add(req.body)
-})
 
 //	Delete visitor
 
@@ -77,9 +69,41 @@ app.delete('/visitor/:id', async (req, res) => {
 	console.log('Visitor deleted successfully! ID: ' + req.params.id)
 })
 
+//	Visitor Login Page
+app.get('/login', (req, res) => {
+	res.render('login')
+})
 
+//	Visitor Check Login
+app.post('/check/login', async (req, res) => {
+	const result = await VisitorService.checkLogin(req.body.username, req.body.password)
+	if(!result.success)
+		return res.redirect('/login',result)
+	res.redirect('/index')
+})
+
+//	Visitor Signup Page
+app.get('/signup', (req, res) => {
+	res.render('signup')
+})
+
+//	Visitor Check Signup
+app.post('/check/signup', async (req, res) => {
+	const result = await VisitorService.checkSignup(req.body.username)
+	if(!result.success)
+		return res.render('signup', {err:result})
+	const visitor = new Visitor(
+		req.body.username,
+		req.body.password,
+    req.body.fullName,
+    req.body.birthYear
+	)
+
+	await VisitorService.add(visitor)
+	res.redirect('/login')
+
+})
 
 app.listen(port,hostname , ()=>{
 	console.log(`Server running at http://${hostname}:${port}`)
 })
- 

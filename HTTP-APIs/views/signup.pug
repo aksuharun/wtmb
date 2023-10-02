@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title Signup
+	body
+		h1 Signup
+		form(action="/check/signup" method="POST")
+			table
+				tr
+					td Full Name:
+					td
+						input(type="text" name="fullName" minlength="5" required)
+				tr
+					td Username:
+					td
+						input(type="text" name="username" minlenth="3" required)
+				tr
+					td Password:
+					td
+						input(type="password" name="password" minlength="8" required)
+				tr
+					td Birth Year:
+					td 
+						input(type="number" name="birthYear" min="1923" max="2005" required)
+				tr
+					td
+						input(type="submit", value="Signup")
+				tr
+					td(colspan="2")
+						a(href="/login") Already have an account?
+				if err
+					tr
+						td Username or Password is incorrect

@@ -1,7 +1,8 @@
 const Visitor = class{
-	constructor(firstName, lastName , birthYear, ownedBooks = [], id) {
-		this.firstName = firstName 
-		this.lastName = lastName 
+	constructor(username, password, fullName , birthYear, ownedBooks = [], id) {
+		this.username = username
+    this.password = password
+		this.fullName = fullName
 		this.birthYear = birthYear  
 		this.ownedBooks = ownedBooks
 		this.id = id
@@ -11,8 +12,8 @@ const Visitor = class{
 		this.ownedBooks(book)
 	}
 
-	static create({firstName, lastName, birthYear, ownedBooks, id}) {
-		return new Visitor(firstName, lastName, birthYear, ownedBooks, id)
+	static create({username, password, fullName, birthYear, ownedBooks, id}) {
+		return new Visitor(username, password, fullName, birthYear, ownedBooks, id)
 	}
 }
 
