@@ -1,6 +1,10 @@
 html
 	head
-		title #{visitor.name}
+		title #{visitor.fullName}
 	body
-		h1 Name: #{visitor.firstName} #{visitor.lastName} 
+		h1 Name: #{visitor.fullName}
 		h1 Birth Year: #{visitor.birthYear}
+		a(href="/") 
+			p Back
+		a(href="/logout") 
+			p Logout

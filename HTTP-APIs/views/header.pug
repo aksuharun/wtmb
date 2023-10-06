@@ -6,5 +6,9 @@ header
 				li Books
 			a(href='#contact')
 				li Contact
-			a(href='login')
-				li Login
+			if session.visitorId
+				a(href='profile')
+					li Profile
+			else
+				a(href='login')
+					li Login

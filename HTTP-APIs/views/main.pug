@@ -1,30 +1,14 @@
 main
 	h1 Books of the Month
 	.book-container
-		.book-card
-			img(src="https://m.media-amazon.com/images/I/413V3sIKSJL._SY445_SX342_.jpg")
-			.book-text
-				h1 The Hobbit
-				p Author: JRR Tolkien
-		.book-card
-			img(src="https://m.media-amazon.com/images/I/413V3sIKSJL._SY445_SX342_.jpg")
-			.book-text
-				h1 The Hobbit
-				p Author: JRR Tolkien
-		.book-card
-			img(src="https://m.media-amazon.com/images/I/413V3sIKSJL._SY445_SX342_.jpg")
-			.book-text
-				h1 The Hobbit
-				p Author: JRR Tolkien
-		.book-card
-			img(src="https://m.media-amazon.com/images/I/413V3sIKSJL._SY445_SX342_.jpg")
-			.book-text
-				h1 The Hobbit
-				p Author: JRR Tolkien
-		.book-card
-			img(src="https://m.media-amazon.com/images/I/413V3sIKSJL._SY445_SX342_.jpg")
-			.book-text
-				h1 The Hobbit
-				p Author: JRR Tolkien
+		- var i = 0
+		while i < 5
+			a(href="book/" + books[i].id) 
+				.book-card
+					img(src=books[i].img)
+					.book-text
+						h1 #{books[i].name}
+						p #{books[i++].author}
+
 	a(href="book/all")
 		.btn All Books

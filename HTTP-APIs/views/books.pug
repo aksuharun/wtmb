@@ -8,10 +8,10 @@ html
 			h1 Book List
 			h2 There are #{books.length} Books in the list
 			.book-container
-			each book in books
-				a(href=book.id)
-					.book-card
-						img(src=book.img)
-						.book-text
-							h1 #{book.name}
-							p #{book.author}
+				each book in books
+					a(href=book.id)
+						.book-card
+							img(src=book.img)
+							.book-text
+								h1 #{book.name}
+								p #{book.author}

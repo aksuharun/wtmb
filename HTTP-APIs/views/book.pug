@@ -18,5 +18,8 @@ html
 				tr
 					td Pages
 					td #{book.page}
+				tr
+					td
+						a(href = session.visitorId > 0 ? "own/" + book.id : "../login") Get Book
 		else
 			h1 404 Page not found

@@ -5,5 +5,5 @@ html
     h1 Visitor List
     h2 There are #{visitors.length} Visitors in the list
 
-    each visitor in visitors
-      h4 #{visitor.id}- #{visitor.firstName} #{visitor.lastName}
+    each visitor, index in visitors
+      h4 #{++index}- #{visitor.fullName}

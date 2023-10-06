@@ -112,7 +112,6 @@ main, section{
 
 
 main > h1, section > h1{
-  margin-bottom: 2rem;
   color: var(--text-color);
   text-shadow: 1px -1px 4px rgba(119, 119, 119, 0.4);
   text-align: center;
@@ -128,7 +127,7 @@ section > h2{
   display: grid;
   grid-template-columns: repeat(5,1fr);
   gap:3rem 8vw;
-  margin-bottom: 2rem;
+  padding: 2rem 0
 }
 
 

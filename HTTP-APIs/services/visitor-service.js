@@ -20,10 +20,10 @@ class VisitorService extends BaseService{
 				result = {success:true, visitorId:visitor.id}
 			}
 		})
-		console.log("RESULT",result,"\n\n")
 		if(result != undefined){
 			return result
 		}
+		
 		return {success:false}
 	}
 
