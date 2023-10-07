@@ -11,6 +11,14 @@ class VisitorService extends BaseService{
 			super(VisitorModel, `${__dirname}/../database/visitor-database.json`)
 	}
 
+	async update(visitor){
+		const visitors = await this.findAll()
+    const visitorIndex = visitors.findIndex(p => p.id == visitor.id)
+    if (visitorIndex < 0) return
+		visitors[visitorIndex] = visitor
+		await this.saveAll(visitors)
+	}
+	
 	async checkLogin(username, password){
 		const visitors = await this.findAll()
 		let result
@@ -41,6 +49,7 @@ class VisitorService extends BaseService{
 
 		return {success:true}
 	}
+	
 }
 
 export default new VisitorService()   
