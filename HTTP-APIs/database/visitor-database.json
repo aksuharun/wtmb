@@ -1,1 +1,1 @@
-[["1","2"],{"username":"3","password":"4","fullName":"5","birthYear":"6","ownedBooks":"7","id":1},{"username":"8","password":"9","fullName":"10","birthYear":"6","ownedBooks":"11","id":2},"aksuharun","sifre123","Harun Aksu","2004",[],"rakpinar","12345678","Rumeysa Nur Akpinar",[]]
+[["1","2"],{"username":"3","password":"4","fullName":"5","birthYear":"6","borrowedBooks":"7","id":1},{"username":"8","password":"9","fullName":"10","birthYear":"6","borrowedBooks":"11","id":2},"aksuharun","sifre123","Harun Aksu","2004",[1],"rakpinar","12345678","Rumeysa Nur Akpinar",[3]]

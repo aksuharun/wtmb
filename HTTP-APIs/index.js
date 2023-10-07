@@ -78,7 +78,7 @@ app.get('/', async (req, res) => {
 	const books = await BookService.findAll()
 	res.render('index',{
 		session: req.session,
-		books:books
+		books: books
 	})
 })
 
@@ -100,17 +100,22 @@ app.post('/book/add', async (req, res) => {
 		res.redirect('/book/add')
 })
 	
-// Own Book
+// Borrow Book
 
-app.get("/book/own/:id", async (req, res) => {
+app.get("/book/borrow/:id", async (req, res) => {
+	if(!req.session.visitorId)
+		res.redirect('../../login')
+	
 	const id = req.params.id
 	const book = await BookService.find(id)
 	const visitor = await VisitorService.find(req.session.visitorId)
-	res.send('hi')
-
-	if(visitor.ownedBooks === book.id)
-		visitor.barrow(book)
 	
+	if( !visitor.borrowedBooks.some( bookId => bookId == book.id) && visitor){
+		visitor.borrow(book)
+		await VisitorService.update(visitor)
+		console.log('updated borrowed books list', book.name)
+	}
+	res.redirect('../' + book.id)
 })
 
 //	View Books
@@ -123,9 +128,14 @@ app.get('/book/all', async (req, res) => {
 app.get('/book/:id', async (req, res) => {
 	const id = req.params.id
 	const book = await BookService.find(id)
+	let visitor = null
+	if(req.session.visitorId)
+		visitor = await VisitorService.find(req.session.visitorId)
+	
 	res.render('book', {
 		session: req.session,
-		book: book
+		book: book,
+		visitor: visitor
 	})
 })
 
@@ -172,6 +182,7 @@ app.post('/check/login', async (req, res) => {
 		res.redirect('/login')
 	}else{
 		req.session.cookie.maxAge = setCookieMaxAge('1d')
+		console.log("User loged in! Session time:", req.session.cookie.maxAge/1000/60/60,'hours')
 		req.session.visitorId = result.visitorId
 		res.redirect('/')
 	}

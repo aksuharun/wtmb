@@ -19,7 +19,18 @@ html
 					td Pages
 					td #{book.page}
 				tr
-					td
-						a(href = session.visitorId > 0 ? "own/" + book.id : "../login") Get Book
+					td(colspan=2)
+						-var isBorrowed = false
+						if visitor
+							each borrowedBook in visitor.borrowedBooks
+								if borrowedBook === book.id
+									#{isBorrowed = true}
+							if isBorrowed			
+								|	You Borrowed this book
+							else
+								a(href="./borrow/"+ book.id) Barrow This Book
+						else
+							a(href="../login") Login
+							|  to borrow this book
 		else
 			h1 404 Page not found
