@@ -1,11 +1,4 @@
-import {promises as fsp} from 'fs'
-import {parse as flattedParse, stringify as flattedStringify} from 'flatted'
-
 const Service = class {
-	constructor(model, dbPath) {
-		this.model = model
-	}
-
 	async findAll() {
 		this.model.find()
 	}

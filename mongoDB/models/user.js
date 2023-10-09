@@ -1,8 +1,8 @@
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 
 const PersonSchema = new mongoose.Schema({
 	username: String,
-	fullName: String,
+	name: String,
 	age: Number,
 })
 

@@ -1,17 +1,10 @@
-const Group = class{
-    constructor(name, participants = [], id) {
-        this.name = name
-        this.participants = participants
-        this.id = id
-    }
+import mongoose from 'mongoose';
 
-    info() {
-        console.log('The group', this.name, 'has', this.participants.length, 'participants')
-    }
+const GroupSchema = mongoose.Schema({
+    name: String,
+    participants: [String],
+})
 
-    static create({name, participants, id}) {
-        return new Group(name, participants, id)
-    }
-}
+const GroupModel = mongoose.model('Group', GroupSchema)
 
-export default Group
+export default GroupModel
