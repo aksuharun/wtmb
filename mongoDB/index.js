@@ -2,6 +2,7 @@ import express from 'express'
 import './mongo-connection.js'
 
 import {userRouter} from './routes/user.js'
+import {groupRouter} from './routes/group.js'
 
 
 const app = express()
@@ -10,7 +11,7 @@ app.use(express.json())
 // app.use(express.urlencoded({ extended: true }))
 
 app.use('/user',userRouter)
-// app.use('/group',groupRouter)
+app.use('/group',groupRouter)
 
 app.get('/', (req, res) => {
 	res.render('index')

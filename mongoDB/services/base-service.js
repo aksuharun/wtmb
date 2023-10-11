@@ -1,18 +1,23 @@
 const Service = class {
 	async findAll() {
-		this.model.find()
+		return await this.model.find()
 	}
 
 	async add(item) {
-		this.model.create(item)
+		return await this.model.create(item)
 	}
 
 	async	del(itemId) {
-		this.mode.remove({ _id: itemId })
+		return await this.model.deleteOne({ _id: itemId })
 	}
 
 	async find(itemId) {
-		this.model.findById(itemId)
+		return await this.model.findById(itemId)
+	}
+
+	async update(itemId, item) {
+		
+		return await this.model.findOneAndUpdate({ _id: itemId}, item)
 	}
 }
 export default Service
