@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	if items === undefined
+		h1 There is no item
+	else
+		h1 The number of item is #{items.length}
+		each item in items
+			hr
+			p
+				strong #{item.name}
+				| : #{item.id}
+		hr
+		br
+		br
+		pre #{JSON.stringify(items,null,4)}
