@@ -11,10 +11,16 @@ router.get('/all', async (req,res) => {
 	res.render('list',{items: users})
 })
 
-//	List Specific User
-router.get('/:id', async (req,res) =>{
+//	Fetch User
+router.get('/:id', async (req,res) => {
 	const user = await UserSerice.find(req.params.id)
   res.render('data',{data: user})
+})
+
+// Fetch User as Json
+router.get('/:id/json', async (req, res) => {
+	const user = await UserSerice.find(req.params.id)
+	res.send(user)
 })
 
 //	Add User
