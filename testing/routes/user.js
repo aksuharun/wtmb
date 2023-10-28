@@ -11,6 +11,13 @@ router.get('/all', async (req,res) => {
 	res.render('list',{items: users})
 })
 
+// Fetch users as json
+
+router.get('/all/json', async (req,res) => {
+	const users = await UserSerice.findAll()
+	res.send(users)
+})
+
 //	Fetch User
 router.get('/:id', async (req,res) => {
 	const user = await UserSerice.find(req.params.id)

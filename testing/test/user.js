@@ -3,15 +3,18 @@ import request from 'supertest'
 import app from '../app.js'
 
 const randUsername = () => 'createdfortesting' + Math.floor(Math.random() * (10 ** 9))
-
-test('Create new user', async t => {
-	t.plan(4)
+const randUser = () => {
 	const userToCreate = {
 		username : randUsername(),
 		name : 'Test Testerson',
 		age : 128,
 		groups : []
 	}
+	return userToCreate
+}
+test('Create new user', async t => {
+	t.plan(4)
+	const userToCreate = randUser()
 
 	const res = await request(app)
 		.post('/user')
@@ -25,26 +28,21 @@ test('Create new user', async t => {
 
 test('Fetch a user', async t => {
 	t.plan(3)
-	const userToCreate = {
-		username : randUsername(),
-		name : 'Test Testerson',
-		age : 128,
-		groups : []
-	}
+	const userToCreate = randUser()
 	
 	const createdUser = (await request(app)
 		.post('/user')
 		.send(userToCreate)).body
 		
-	const fetchRes = await request(app)
+	const res = await request(app)
 		.get(`/user/${createdUser._id}`)
 	
-	t.is(fetchRes.status, 200)
-	const fetchResJson = await request(app)
+	t.is(res.status, 200)
+	const jsonRes = await request(app)
 		.get(`/user/${createdUser._id}/json`)
 	
-	t.is(fetchResJson.status, 200)
-	t.deepEqual(fetchResJson.body, createdUser)
+	t.is(jsonRes.status, 200)
+	t.deepEqual(jsonRes.body, createdUser)
 })
 
 test('Delete a User', async t => {
@@ -65,13 +63,34 @@ test('Delete a User', async t => {
 	
 	t.is(deleteRes.status, 200)
 	t.is(deleteRes.ok, true)
-	const fetch = await request(app)
+
+	const fetchRes = await request(app)
 		.get(`/user/${createdUser._id}`)
 	
-	t.is(fetch.status, 404)
+	t.is(fetchRes.status, 404)
 	
-	const fetchJson = await request(app)
+	const fetchJsonRes = await request(app)
 		.get(`/user/${createdUser._id}/json`)
 	
-	t.is(fetchJson.status, 404)
+	t.is(fetchJsonRes.status, 404)
 })
+
+test('Get list of users', async t => {
+	t.plan(4)
+	const userToCreate = randUser()
+
+	const res  = await request(app)
+		.get('/user/all')
+
+	t.is(res.status, 200)
+
+	const jsonRes  = await request(app)
+		.get('/user/all/json')
+	
+	t.is(jsonRes.status, 200)
+
+	t.true(Array.isArray(jsonRes.body), 'Body should be an array')
+	t.true(jsonRes.body.length > 0)
+
+})
+
