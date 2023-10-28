@@ -62,7 +62,7 @@ router.get('/:id/groups', async (req,res) =>{
 	const group = await GroupService.find(req.body._id)
 	await UserSerice.joinGroup(user, group)
 	
-	res.send(user.groups)
+	res.send(user)
 })
 
 export {router as userRouter}

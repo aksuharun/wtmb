@@ -94,3 +94,34 @@ test('Get list of users', async t => {
 
 })
 
+test('User can join to a group', async t => {
+
+	t.plan(4)
+	const userToCreate = randUser()
+	const groupToCreate = {
+		name: 'Test',
+		participants:[]
+	}
+
+	const createdUser = (await request(app)
+		.post('/user')
+		.send(userToCreate)).body
+
+		
+	const createdGroup = (await request(app)
+		.post('/group')
+		.send(groupToCreate)).body
+		
+	const joinGroupRes = await request(app)
+		.post(`/user/${createdUser._id}/groups`)
+		.send({'_id':createdGroup._id})
+	
+	t.is(joinGroupRes.status, 200)
+	
+	const updatedUser = joinGroupRes.body
+
+	t.is(updatedUser.groups[0]._id, createdGroup._id)
+	t.deepEqual(updatedUser.groups[0], createdGroup)
+	t.notDeepEqual(updatedUser, createdUser)
+})
+
