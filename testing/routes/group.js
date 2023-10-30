@@ -3,17 +3,26 @@ const router = express.Router()
 
 import GroupSerice from '../services/group-service.js'
 
-//	List Groups
+//	List All Groups
 router.get('/all', async (req,res) => {
   const groups = await GroupSerice.findAll()
 	res.render('list',{items: groups})
 })
 
 
-//	List Specific Group
+//	Fetch Group
 router.get('/:id', async (req,res) =>{
 	const group = await GroupSerice.find(req.params.id)
-    res.render('data',{data: group})
+  if(!group) res.status(404)
+	res.render('data',{data: group})
+})
+
+//Fetch Group as JSON
+
+router.get('/:id/json', async (req,res) =>{
+	const group = await GroupSerice.find(req.params.id)
+	if(!group) res.status(404)
+	res.send(group)
 })
 
 //	Add Group
@@ -23,8 +32,9 @@ router.post('/', async (req,res) =>{
 })
 
 //	Update Group
-router.post('/update/:id', async (req,res) =>{
+router.patch('/:id', async (req, res) =>{
   const group = await GroupSerice.update(req.params.id, req.body)
+	if(!user) res.status(200)
   res.send(group)
 })
 

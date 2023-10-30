@@ -15,9 +15,11 @@ const Service = class {
 		return await this.model.findById(itemId)
 	}
 
-	async update(itemId, item) {
-		
-		return await this.model.findOneAndUpdate({ _id: itemId}, item)
+	async update(itemId, update) {
+		return await this.model.findOneAndUpdate(
+			{ _id: itemId }, 
+			update, 
+			{returnOriginal: false})
 	}
 }
 export default Service

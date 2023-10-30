@@ -2,10 +2,10 @@ import test from 'ava'
 import request from 'supertest'
 import app from '../app.js'
 
-const randUsername = () => 'createdfortesting' + Math.floor(Math.random() * (10 ** 9))
+const randNum = () => Math.floor(Math.random() * (10 ** 9))
 const randUser = () => {
 	const userToCreate = {
-		username : randUsername(),
+		username :'createdForTesting' + randNum(),
 		name : 'Test Testerson',
 		age : 128,
 		groups : []
@@ -38,6 +38,7 @@ test('Fetch a user', async t => {
 		.get(`/user/${createdUser._id}`)
 	
 	t.is(res.status, 200)
+
 	const jsonRes = await request(app)
 		.get(`/user/${createdUser._id}/json`)
 	
@@ -45,8 +46,45 @@ test('Fetch a user', async t => {
 	t.deepEqual(jsonRes.body, createdUser)
 })
 
+test('Update a User', async t => {
+	t.plan(7)
+
+	const userToCreate = randUser()
+	const createRes = await request(app)
+		.post('/user')
+		.send(userToCreate)
+
+	t.is(createRes.status, 200)
+	const createdUser = createRes.body
+	
+	const newUsername = 'newusername' + randNum()
+	const withUpdatedUsername = (await request(app)
+		.patch(`/user/${createdUser._id}`)
+		.send({ username: newUsername })).body
+	
+	t.is(withUpdatedUsername.username, newUsername)
+	t.not(newUsername, createdUser.username)
+
+	const newName = 'New Name'
+	const withUpdatedName = (await request(app)
+		.patch(`/user/${createdUser._id}`)
+		.send({ name: newName })).body
+
+	t.is(withUpdatedName.name, newName)
+	t.not(withUpdatedName.name, createdUser.name)
+
+	const newAge = 32 // It was 128 before
+	const withUpdatedAge = (await request(app)
+		.patch(`/user/${createdUser._id}`)
+		.send({ age: newAge })).body
+	
+	t.is(withUpdatedAge.age, newAge)
+	t.not(createdUser.age, newAge)
+
+})
+
 test('Delete a User', async t => {
-	t.plan(4)
+	t.plan(3)
 	const userToCreate = {
 		username: 'willSelfDestruct',
 		name: 'Test Testerson',
@@ -62,7 +100,6 @@ test('Delete a User', async t => {
 		.delete(`/user/${createdUser._id}`)
 	
 	t.is(deleteRes.status, 200)
-	t.is(deleteRes.ok, true)
 
 	const fetchRes = await request(app)
 		.get(`/user/${createdUser._id}`)

@@ -5,13 +5,13 @@ import UserSerice from '../services/user-service.js'
 import GroupService from '../services/group-service.js'
 
 
-//	List Users
+//	List All Users
 router.get('/all', async (req,res) => {
   const users = await UserSerice.findAll()
 	res.render('list',{items: users})
 })
 
-// Fetch users as json
+// Fetch All Users as JSON
 
 router.get('/all/json', async (req,res) => {
 	const users = await UserSerice.findAll()
@@ -39,8 +39,9 @@ router.post('/', async (req,res) =>{
 })
 
 //	Update User
-router.post('/update/:id', async (req,res) =>{
+router.patch('/:id', async (req, res) =>{
 	const user = await UserSerice.update(req.params.id, req.body)
+	if(!user) res.status(404)
 	res.send(user)
 })
 
