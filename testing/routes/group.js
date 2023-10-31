@@ -9,7 +9,12 @@ router.get('/all', async (req,res) => {
 	res.render('list',{items: groups})
 })
 
-
+// Fetch All Groups as JSON
+router.get('/all/json', async (req,res) => {
+	const groups = await GroupSerice.findAll()
+	if(!groups && groups.length <= 0) res.status(404)
+	res.send(groups)
+})
 //	Fetch Group
 router.get('/:id', async (req,res) =>{
 	const group = await GroupSerice.find(req.params.id)
@@ -34,7 +39,7 @@ router.post('/', async (req,res) =>{
 //	Update Group
 router.patch('/:id', async (req, res) =>{
   const group = await GroupSerice.update(req.params.id, req.body)
-	if(!user) res.status(200)
+	if(!group) res.status(404)
   res.send(group)
 })
 
