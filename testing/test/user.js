@@ -113,8 +113,14 @@ test('Delete a User', async t => {
 })
 
 test('Get list of users', async t => {
-	t.plan(4)
+	t.plan(5)
 	const userToCreate = randUser()
+
+	const createdUser = await request(app)
+		.post('/user')
+		.send(userToCreate)
+	
+	t.is(createdUser.status, 200)
 
 	const res  = await request(app)
 		.get('/user/all')
